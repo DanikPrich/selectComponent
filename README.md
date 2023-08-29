@@ -1,13 +1,8 @@
 # JavaScript Coding Challenge #1
+Task template for implementing a native JS plugin.
 
-Шаблон задания на реализацию нативного JS плагина 
-
-## Условия решения задачи:
-1. Должен быть точно такой же функционал с такими же анимациями
-2. Данные должны быть получены асинхронно по https://vladilen-dev.firebaseio.com/technologies.json
-3. Нельзя использовать JavaScript библиотеки и CSS UI библиотеки, только нативные инструменты
-4. Шаблон в HTML должен быть пустой div, остальное должно генерироваться с помощью JavaScript
-
-## Результаты:
-Ссылку на github репозиторий или zip архив кидайте мне в ВК: https://vk.com/vladilen.minin \
-Если задача будет реализована до 17 мая 2019 года (не включительно), то на каждое решение вы получите отзыв с комментарием о вашей работе, а победитель получит 1 час моих консультаций
+## Task Solution Requirements:
+1. The functionality and animations must be exactly the same.
+2. Data must be obtained asynchronously via https://vladilen-dev.firebaseio.com/technologies.json
+3. You cannot use JavaScript libraries or CSS UI libraries, only native tools.
+4. The HTML template should consist of an empty div; everything else should be generated using JavaScript.
