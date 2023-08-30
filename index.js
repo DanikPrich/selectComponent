@@ -1,21 +1,38 @@
-class Select {
-  constructor(params) {
-    this.selector = params.selector,
-    this.label = params.label,
-    this.url = params.url
+// class Select {
+//   constructor(params) {
+//     this.selector = params.selector,
+//     this.label = params.label,
+//     this.url = params.url
+//   }
+// }
+
+// const select = new Select({
+//   selector: '#select',
+//   label: 'Выберите технологию',
+//   url: 'https://vladilen-dev.firebaseio.com/technologies.json',
+//   onSelect(selectedItem) {}
+// })
+
+async function fetchData(url) {
+  try {
+    //server with data is not responding - added hardkode
+    return ['Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native', 'Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native']
+
+  } catch (error) {
+    throw new Error(error)
   }
 }
 
-const select = new Select({
-  selector: '#select',
-  label: 'Выберите технологию',
-  url: 'https://vladilen-dev.firebaseio.com/technologies.json',
-  onSelect(selectedItem) {}
-})
-
-const selectItems = ['Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native', 'Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native']
-
-
+fetchData('https://vladilen-dev.firebaseio.com/technologies.json')
+  .then(response => {
+    response.forEach((item) => {
+      const element = document.createElement('div')
+      element.classList.add('select-card__item')
+      element.textContent = item
+      selectItemsCard.appendChild(element)
+    })
+  })
+  
 const selectElement = document.querySelector('#select')
 selectElement.className = 'select'
 
@@ -24,7 +41,6 @@ label.innerText = 'Select item'
 label.classList.add('select__label')
 
 const selectedItem = document.createElement('span')
-// selectedItem.innerText = 'Hello'
 selectedItem.classList.add('select__value')
 
 const arrowIcon = new Image
@@ -34,12 +50,6 @@ arrowIcon.classList.add('select__arrow')
 const selectItemsCard = document.createElement('div')
 selectItemsCard.classList.add('select-card')
 
-selectItems.forEach((item) => {
-  const element = document.createElement('div')
-  element.classList.add('select-card__item')
-  element.textContent = item
-  selectItemsCard.appendChild(element)
-})
 
 selectElement.append(label, selectedItem, arrowIcon, selectItemsCard)
 
