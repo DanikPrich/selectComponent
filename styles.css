@@ -116,6 +116,18 @@ button[data-type]:hover {
   height: 200px;
 }
 
+.select-card__loading {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 17px;
+}
+
+.select-card__loading_active {
+  display: flex;
+}
+
 .select-card__item {
   font-size: 16px;
   padding: 15px;
