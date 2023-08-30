@@ -17,10 +17,13 @@
 .settings {
   border-right: 1px dashed #ccc;
   width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .settings h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .settings ul {
@@ -28,6 +31,26 @@
   margin: 0;
   padding: 0;
   margin-bottom: 1rem;
+}
+
+#actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button[data-type] {
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid rgb(205, 205, 205);
+  font-size: 14px;
+  transition: .2s ease;
+  min-width: 110px;
+  cursor: pointer;
+}
+
+button[data-type]:hover {
+  background-color: rgb(205, 205, 205);
 }
 
 .select {
@@ -48,10 +71,14 @@
   transform: translateY(-50%);
   transition: .2s ease;
 }
-.select__label_active {
+.select__label_opened {
   top: -5px;
-  /* color: rgb(62, 115, 195); */
   color: rgb(145, 145, 145);
+  font-size: 12px;
+}
+.select__label_selected {
+  top: -5px;
+  color: rgb(62, 115, 195);
   font-size: 12px;
 }
 
@@ -61,6 +88,11 @@
 
 .select__arrow {
   height: 15px;
+  transition: .3s ease;
+}
+
+.select__arrow_opened {
+  transform: rotate(180deg);
 }
 
 .select-card {

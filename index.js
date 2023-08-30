@@ -43,15 +43,60 @@ selectItems.forEach((item) => {
 
 selectElement.append(label, selectedItem, arrowIcon, selectItemsCard)
 
-selectElement.addEventListener('click', (event) => {
+
+const actionBtns = document.querySelectorAll('[data-type]')
+
+actionBtns.forEach((button) => {
+  button.addEventListener('click', actionsCallback)
+})
+
+function actionsCallback(event) {
+  const actionType = event.target.getAttribute('data-type')
+
+  switch (actionType) {
+    case 'open': 
+      openSelect()
+      break;
+    case 'close': 
+      closeSelect()
+      break;
+  }
+}
+
+
+
+
+function openSelect() {
+  selectItemsCard.classList.add('select-card_active')
+  label.classList.add('select__label_opened')
+  arrowIcon.classList.add('select__arrow_opened')
+}
+
+function closeSelect() {
+  selectItemsCard.classList.remove('select-card_active')
+  label.classList.remove('select__label_opened')
+  arrowIcon.classList.remove('select__arrow_opened')
+}
+
+function toggleSelect() {
   selectItemsCard.classList.toggle('select-card_active')
-  label.classList.toggle('select__label_active')
+  label.classList.toggle('select__label_opened')
+  arrowIcon.classList.toggle('select__arrow_opened')
+}
+
+function selectItem(newValue) {
+  selectedItem.innerText = newValue
+  label.classList.add('select__label_selected')
+}
+
+
+selectElement.addEventListener('click', (event) => {
+  toggleSelect()
 
   if(event.target.classList.contains('select-card__item')) {
-    console.log('card item!!', event.target.textContent);
+    selectItem(event.target.textContent)
   }
 })
 
-window.console.log(selectElement)
 
 
