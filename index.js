@@ -35,7 +35,7 @@ async function fetchData(url) {
     })
 
     //server with data is not responding - added hardkode
-    return ['Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native', 'Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native']
+    return ['Angular', 'Vuex', 'ReactJS', 'JQuery', 'React Native', 'NodeJS', 'HTML', 'SASS', 'Webpack', 'Redux']
     
 
   } catch (error) {
@@ -43,26 +43,10 @@ async function fetchData(url) {
   }
 }
 
-
-
-// class Select {
-//   constructor(params) {
-//     this.selector = params.selector,
-//     this.label = params.label,
-//     this.url = params.url
-//   }
-// }
-
-// const select = new Select({
-//   selector: '#select',
-//   label: 'Выберите технологию',
-//   url: 'https://vladilen-dev.firebaseio.com/technologies.json',
-//   onSelect(selectedItem) {}
-// })
-
-
 const [selectElement, label, selectedItem, arrowIcon, selectItemsCard, wrapper, cardLoading] = initial()
 const actionBtns = document.querySelectorAll('[data-type]')
+
+let selectItems = []
 
 selectElement.append(label, selectedItem, arrowIcon, selectItemsCard)
 
@@ -97,6 +81,35 @@ function setCardLoading(isLoading) {
   }
 }
 
+function selectItemByIndex(index) {
+  if (selectItems[index]) {
+    selectItem(selectItems[index])
+  }
+}
+
+function getSelected() {
+  if(selectedItem.textContent) alert(selectedItem.textContent)
+}
+
+function clearSelect() {
+  selectedItem.innerText = ''
+  label.classList.remove('select__label_opened')
+  label.classList.remove('select__label_selected')
+  arrowIcon.classList.remove('select__arrow_opened')
+}
+
+function destroySelect() {
+  selectElement.remove()
+}
+
+wrapper.addEventListener('click', (event) => {
+  const { target } = event
+
+  if (![selectElement, label, arrowIcon, selectedItem].includes(target) && ![...actionBtns].includes(target)) {
+    closeSelect()
+  }
+})
+
 setCardLoading(true)
 
 fetchData('https://vladilen-dev.firebaseio.com/technologies.json')
@@ -109,8 +122,9 @@ fetchData('https://vladilen-dev.firebaseio.com/technologies.json')
       element.textContent = item
       selectItemsCard.appendChild(element)
     })
-  })
 
+    selectItems = response
+  })
 
 actionBtns.forEach((button) => {
   button.addEventListener('click', actionsCallback)
@@ -126,16 +140,20 @@ function actionsCallback(event) {
     case 'close': 
       closeSelect()
       break;
+    case 'set': 
+      selectItemByIndex(5)
+      break;
+    case 'get': 
+      getSelected()
+      break;
+    case 'clear': 
+      clearSelect()
+      break;
+    case 'destroy': 
+      destroySelect()
+      break;
   }
 }
-
-wrapper.addEventListener('click', (event) => {
-  const { target } = event
-
-  if (![selectElement, label, arrowIcon, selectedItem].includes(target) && ![...actionBtns].includes(target)) {
-    closeSelect()
-  }
-})
 
 selectElement.addEventListener('click', (event) => {
   toggleSelect()
